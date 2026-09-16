@@ -1,0 +1,128 @@
+<head>
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="/css/mybooking.css">
+</head>
+<% layout("layouts/boilerplate") %>
+
+    <div class="container my-5">
+
+        <div class="booking-header">
+            <h2>My Bookings</h2>
+            <p>View all your upcoming and previous bookings</p>
+        </div>
+
+        <% if (bookings.length===0) { %>
+
+            <div class="empty-bookings">
+                <h4>No bookings yet</h4>
+                <p>You haven't booked any place yet.</p>
+
+                <a href="/listings" class="btn btn-danger">
+                    Explore Places
+                </a>
+            </div>
+
+            <% } else { %>
+
+                <div class="row g-4">
+
+                    <% bookings.forEach(booking=> { %>
+
+                        <div class="col-lg-6">
+
+                            <div class="booking-item">
+
+                                <div class="booking-image">
+
+                                    <% if (booking.listing.image && booking.listing.image.url) { %>
+
+                                        <img src="<%= booking.listing.image.url %>" alt="<%= booking.listing.title %>">
+
+                                        <% } else { %>
+
+                                            <div class="no-image">
+                                                No Image
+                                            </div>
+
+                                            <% } %>
+
+                                </div>
+
+                                <div class="booking-details">
+
+                                    <h4>
+                                        <%= booking.listing.title %>
+                                    </h4>
+
+                                    <p class="location">
+                                        <%= booking.listing.location %>,
+                                            <%= booking.listing.country %>
+                                    </p>
+
+                                    <hr>
+
+                                    <div class="booking-info">
+
+                                        <p>
+                                            <strong>Name:</strong>
+                                            <%= booking.name %>
+                                        </p>
+
+                                        <p>
+                                            <strong>Persons:</strong>
+                                            <%= booking.persons %>
+                                        </p>
+
+                                        <p>
+                                            <strong>Children:</strong>
+                                            <%= booking.children %>
+                                        </p>
+
+                                        <p>
+                                            <strong>Check-in:</strong>
+                                            <%= new Date(booking.startDate).toLocaleDateString() %>
+                                        </p>
+
+                                        <p>
+                                            <strong>Check-out:</strong>
+                                            <%= new Date(booking.endDate).toLocaleDateString() %>
+                                        </p>
+
+                                        <p>
+                                            <strong>Payment:</strong>
+
+                                            <% if (booking.paymentMethod==="pay_now" ) { %>
+
+                                                Pay Now
+
+                                                <% } else { %>
+
+                                                    Pay at Villa
+
+                                                    <% } %>
+
+                                        </p>
+
+                                    </div>
+
+                                    <div class="booking-status">
+
+                                        <span>
+                                            <%= booking.bookingStatus %>
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <% }) %>
+
+                </div>
+
+                <% } %>
+
+    </div>

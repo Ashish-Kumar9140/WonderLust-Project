@@ -50,16 +50,40 @@
                     </button>
                 </form>
             </div>
+
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="/listings/new">Add Places</a>
-                <% if(!currUser){ %>
-                    <a class="nav-link" aria-current="page" href="/login">Login</a>
-                    <a class="nav-link" href="/signup">Signup</a>
-                    <%}%>
-                        <% if(currUser){ %>
-                            <a class="nav-link" href="/logout">logout</a>
-                            <%}%>
+
+                <a class="nav-link" href="/listings/new">
+                    Add Places
+                </a>
+
+                <% if (!currUser) { %>
+
+                    <a class="nav-link" href="/login">
+                        Login
+                    </a>
+
+                    <a class="nav-link" href="/signup">
+                        Signup
+                    </a>
+
+                    <% } %>
+
+                        <% if (currUser) { %>
+
+                            <a class="nav-link" href="/my-bookings">
+                                My Bookings
+                            </a>
+
+                            <a class="nav-link" href="/logout">
+                                Logout
+                            </a>
+
+                            <% } %>
+
             </div>
+
+          
         </div>
     </div>
 </nav>

@@ -25,8 +25,9 @@ const listingsRouter = require("./routers/listing.js");
 const reviewsRouter = require("./routers/review.js");
 const userRouter = require("./routers/user.js");
 
-
+//   hi im
 const dbUrl = process.env.ATLASDB_URL;
+
 
 
 // Define the port number for the server to listen on
@@ -42,6 +43,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 async function main() {
+    //after use this local url than change to dburl which is defined in .env file
     await mongoose.connect(dbUrl);
 }
 main().then(() => {
@@ -81,12 +83,13 @@ const sessioOptions = {
 app.use(session(sessioOptions));
 app.use(flash());
 
-app.use(passport.initialize());
-app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use((req, res, next) => {
     res.locals.success = req.flash("success");
@@ -109,6 +112,11 @@ app.get("/demouser", async (req, res) => {
 app.use("/listings", listingsRouter);
 app.use("/listings/:id/reviews", reviewsRouter);
 app.use("/", userRouter);
+// booking route ke liye route difined kiya gya hai
+const bookingRouter = require("./routers/booking.js");
+
+app.use("/", bookingRouter);
+
 
 app.get("/", (req, res) => {
     res.redirect("/listings");
