@@ -77,8 +77,7 @@ const sessioOptions = {
     },
 };
 
-// route to display the home page
-//  
+// route to display the home page 
 
 app.use(session(sessioOptions));
 app.use(flash());
@@ -141,10 +140,3 @@ app.listen(port, () => {
     //    console.log(dbUrl)
     console.log(`Server is running on ${port}`);
 })
-// aaj 08 aug ko maine ish project ko github pe push kiya hu
-//use this steps to push
-
-//checking is git working or not
-// git add .
-// git commit -m "your message"
-// git push

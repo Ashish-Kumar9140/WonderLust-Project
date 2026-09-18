@@ -22,10 +22,8 @@ router.get('/', wrapAsync(listingsControllers.index));
 //adding a new listing
 router.get('/new', isloggedIn,listingsControllers.renderNewForm);
 
-
 // Create route to handle form submission and save new listing to the database
 router.post('/', isloggedIn,upload.single('image[url]'), wrapAsync(listingsControllers.newlistingPost));
-
 
 
 //edit route to display the edit form for a specific listing by ID
